@@ -33,7 +33,7 @@ header = {
     "User-Agent": agent,
     'Connection': 'keep-alive'
 }
-
+header_obj = {}
 
 def is_login():
     # 通过个人中心页面返回状态码来判断是否登录
@@ -123,25 +123,38 @@ def zhihu_login(account, password):
     if response.status_code == 201:
         print(response.text)
         # 保存cookie，下次直接读取保存的cookie，不用再次登录
+        header_obj.update(header)
         session.cookies.save()
+        # url = 'https://www.zhihu.com'
+        # print("req url:  "+url)
+        # # response = requests.get(url)
+        # # headers = {
+        # #     'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36',
+        # #     "upgrade-insecure-requests": "1",
+        # # }
+        # # print('1_header=', header)
+        # response = requests.get(url,headers=header_obj, cookies=session.cookies)
+        # ##    req.encoding = "UTF-8"
+        # print(response.text)
     else:
         print("登录失败")
 
 def to_index():
-    def getHtml(self, page_no):
-        url = 'https://www.zhihu.com'
-        print("req url:  "+url)
-        # response = requests.get(url)
-        # headers = {
-        #     'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36',
-        #     "upgrade-insecure-requests": "1",
-        # }
-        response = requests.get(url,headers=header, cookies=session.cookies)
-        ##    req.encoding = "UTF-8"
-        print(response.text)
-        return response.text
+    url = 'https://www.zhihu.com'
+    print("req url:  "+url)
+    # response = requests.get(url)
+    headers = {
+        'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36',
+        "upgrade-insecure-requests": "1",
+    }
+    # print('1_header=', header)
+    response = requests.get(url,headers=header_obj, cookies=session.cookies)
+    ##    req.encoding = "UTF-8"
+    print(response.text)
+    return response.text
 
 
 if __name__ == '__main__':
     is_login()
-    # to_index()
+    print('-----')
+    to_index()

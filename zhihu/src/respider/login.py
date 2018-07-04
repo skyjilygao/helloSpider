@@ -13,6 +13,8 @@ import urllib.request
 
 import urllib3
 
+from facebookads.adobjects.adset import AdSet
+
 # 利用session保持链接
 session = requests.session()
 session.cookies = cookielib.LWPCookieJar(filename="cookies.txt")  # cookie存储文件，

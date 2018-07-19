@@ -17,18 +17,21 @@ def tradition2simple(line):
     # line = line.encode('utf-8')
     return line
 class spider_fb():
-    url = 'https://developers.facebook.com/docs/marketing-api/adgroup/feedback/v3.0'
+    url = "https://graph.facebook.com/v3.0/act_1938323486439678/ads?fields=ad_review_feedback%2Cadset_id%2Ccampaign_id%2Caccount_id%2Cconfigured_status%2Ceffective_status%2Cstatus&filtering=%5B%7B'field'%3A'effective_status'%2C'operator'%3A'IN'%2C'value'%3A%5B'DISAPPROVED'%5D%7D%5D&access_token=EAAXZBwRbZCCloBAByfpvRRvW7QVSoza48lIWCONZCTqT3YclqxZAijR5Nz7RYZAexST7LJk0cz6ZCZBoZArwuiJunT5zOB5lWxEnbzMwOJdpok7qZBxOuWDHNuFDuCl9rjGjVJC0AbrQUdmOm3OxV9Fe0AuaraC5vK8qP8DZAzyYkpsUrE8eswSzBz"
+    # url = 'https://graph.facebook.com/v2.12/act_1965075377097822/ads?access_token=EAAXZBwRbZCCloBAByfpvRRvW7QVSoza48lIWCONZCTqT3YclqxZAijR5Nz7RYZAexST7LJk0cz6ZCZBoZArwuiJunT5zOB5lWxEnbzMwOJdpok7qZBxOuWDHNuFDuCl9rjGjVJC0AbrQUdmOm3OxV9Fe0AuaraC5vK8qP8DZAzyYkpsUrE8eswSzBz&fields=id%2Cad_review_feedback%2Cadset_id%2Ccampaign_id%2Caccount_id%2Cconfigured_status%2Ceffective_status%2Cstatus&filtering=%5B%7B%27field%27%3A%27effective_status%27%2C%27operator%27%3A%27IN%27%2C%27value%27%3A%5B%27DISAPPROVED%27%5D%7D%5D'
+    # url = 'https://developers.facebook.com/docs/marketing-api/adgroup/feedback/v3.0'
     # 请求，获取html页面
     def getHtml(self):
 
         headers = {
             'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36',
             "upgrade-insecure-requests": "1",
-            "accept-language":"zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7"
-            # "accept-language":"us-EN,en;q=0.9,en;q=0.8,us-EN;q=0.7"
+            # "accept-language":"zh-CN,zh;q=0.9,en;q=0.8,zh-TW;q=0.7"
+            "accept-language":"us-EN,en;q=0.9,en;q=0.8,us-EN;q=0.7"
         }
         resp = requests.get(self.url,headers=headers)
         # resp = requests.get(self.url)
+        print(resp)
         text = resp.text
         f = open('feedback.html','w',encoding='utf-8')
         f.write(text)
@@ -106,7 +109,7 @@ def start():
     fb = spider_fb()
     text = fb.getHtml()
     fb.parseHtml_bs4(text)
-    fb.save2db()
+    # fb.save2db()
 
 if __name__ == "__main__":
     start()

@@ -1,28 +1,11 @@
 '''
-def webscreen():
-  url = 'http://www.xxx.com'
-  driver = webdriver.PhantomJS()
-  driver.set_page_load_timeout(300)
-  driver.set_window_size(1280,800)
-  driver.get(url)
-  imgelement = driver.find_element_by_id('XXXX')
-  location = imgelement.location
-  size = imgelement.size
-  savepath = r'XXXX.png'
-  driver.save_screenshot(savepath)
-  im = Image.open(savepath)
-  left = location['x']
-  top = location['y']
-  right = left + size['width']
-  bottom = location['y'] + size['height']
-  im = im.crop((left,top,right,bottom))
-  im.save(savepath)
+当当网 5星图书排行 前500名图书
 '''
 import time
 import requests
 class spider_main():
     def getHtml(self, page_no):
-        url = 'https://www.facebook.com/ads/api/preview_iframe.php?d=AQL_dHmfNvyEP0zQs2tFSpuVwQSj-AyJrL1PrYdt-H7WtiAq7seGnQuTvPjM1FADGmT6B_KbrDXw6nC6HhTVSVF2DIvKMqvjSgnQugfIyiObBv4FqejX3R5HgUZn9j8m-B0CpUD6Ej9deL5rs-tqT2e0IN9AYW0x9s-9Sv86wGEhmI-X4kv2JfKXpDKDJSn6BT94sQ_znG11oHZgCzyHELhHP74DRaiA9ByJuNgAZQFIyt2nkHeqAzTcf3Vu-BaEsVHgCxXtr2sioHwZWdvN1mRG9YvAkr_4WB6eA0sUrpZ9Ng&t=AQI0JNCqwfbVWskZ'
+        url = 'https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzUyNDk0MjA2NQ==&scene=126#wechat_redirect'
         # url = 'http://bang.dangdang.com/books/fivestars/01.00.00.00.00.00-year-2017-0-2-%s' %page_no
         print("req url:  "+url)
         # req = requests.get(url)
@@ -31,7 +14,7 @@ class spider_main():
             "Content-Type":"application/json",
             "Referer:https":"//servicewechat.com/wxa2ae8810d8157e4b/0/page-frame.html"
         }
-        req = requests.get(url)
+        req = requests.get(url,headers=headers)
         ##    req.encoding = "UTF-8"
         return req.text
 
@@ -51,7 +34,7 @@ def start():
             errors.append(e)
         finally:
             if text:
-                f = open(r'file\creative-'+str(i)+'.html', 'w', encoding='utf-8')
+                f = open(r'file\fivestart-'+str(i)+'.html', 'w', encoding='utf-8')
                 f.write(text)
                 f.close()
                 # douban.parse_html_xpath(text, i)

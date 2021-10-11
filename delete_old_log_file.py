@@ -44,7 +44,7 @@ def delete_dir(logDir, days):
 if __name__ == "__main__":
     try:
         opts, args = getopt.getopt(sys.argv[1:], 'd:f:', ['days=', 'folder='])
-        logDir = '/home2/java/logs/aliexpress-seller-adcreate-job'
+        logDir = '/home/skyjilygao/logs/testPorj'
         days = 7
         for opt_name, opt_value in opts:
             if opt_name in ('-d', '--days'):
